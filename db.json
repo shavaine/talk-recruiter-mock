@@ -70,7 +70,7 @@
   "units": [
     {
       "id": 0,
-      "enviroment": "Army",
+      "environment": "Army",
       "name": "UNIT test 1",
       "city": "city 1",
       "province": "province1",
@@ -91,7 +91,7 @@
     },
     {
       "id": 1,
-      "enviroment": "Air Force",
+      "environment": "Air Force",
       "name": "UNIT test 2",
       "city": "city 2",
       "province": "province2",
@@ -112,7 +112,7 @@
     },
     {
       "id": 2,
-      "enviroment": "Navy",
+      "environment": "Navy",
       "name": "UNIT test 3",
       "city": "city 3",
       "province": "province3",

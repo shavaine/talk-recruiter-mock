@@ -41,6 +41,7 @@
           {{ getLatLngDetach.email }}
         </l-popup>
       </l-marker>
+
       <!--*****************( Reserve Force Map )*********************-->
     </l-map>
 
@@ -58,6 +59,7 @@
         v-bind:key="id"
         v-for="(getLatLngUnits, id) in getLatLngUnits"
         :lat-lng="getLatLngUnits"
+        :icon="icon"
       >
         <l-popup>
           {{ getLatLngUnits.name }}<br />
@@ -70,7 +72,7 @@
 
 <script>
 import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
-import { latLng } from "leaflet";
+import { latLng, icon } from "leaflet";
 
 export default {
   name: "Maps",
@@ -85,12 +87,19 @@ export default {
       zoom: 5,
       center: latLng(44.38942, -79.69032),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      withPopup: latLng(44.38942, -79.69032),
-      withTooltip: latLng(44.32562, -79.88852),
       mapOptions: {
         zoomSnap: 0.5
       },
-      shownMap: true
+      shownMap: true,
+      icon: icon({
+        iconUrl:
+          "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+        shadowSize: [41, 41],
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      })
     };
   },
   computed: {
@@ -119,7 +128,8 @@ export default {
           lat: parseFloat(units.latitude),
           lng: parseFloat(units.longitude),
           name: units.name,
-          email: units.email
+          email: units.email,
+          environment: units.environment
         };
       });
       return getLatLngUnits;

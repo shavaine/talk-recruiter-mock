@@ -4,8 +4,17 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    detachments: [],
+    units: []
+  },
+  mutations: {
+    init(state, detachments, units) {
+      state.detachments = detachments;
+      state.units = units;
+    }
+  },
   actions: {},
-  modules: {}
+  modules: {},
+  getters: {}
 });

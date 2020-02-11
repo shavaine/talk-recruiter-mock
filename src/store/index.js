@@ -16,5 +16,21 @@ export default new Vuex.Store({
   },
   actions: {},
   modules: {},
-  getters: {}
+  getters: {
+    armyUnits: state => {
+      return state.units.filter(units => {
+        return units.environment == "Army";
+      });
+    },
+    navyUnits: state => {
+      return state.units.filter(units => {
+        return units.environment == "Navy";
+      });
+    },
+    airforceUnits: state => {
+      return state.units.filter(units => {
+        return units.environment == "Air Force";
+      });
+    }
+  }
 });

@@ -133,7 +133,20 @@ export default {
         };
       });
       return getLatLngUnits;
-    }
+    },
+    getUnitsArmy() {
+      var getUnitsArmy = this.$store.getters.armyUnits.map(units => {
+        return {
+          id: units.id,
+          lat: parseFloat(units.latitude),
+          lng: parseFloat(units.longitude),
+          name: units.name,
+          email: units.email,
+          environment: units.environment
+        };
+      });
+      return getUnitsArmy;
+    },
   },
   methods: {
     zoomUpdate(zoom) {

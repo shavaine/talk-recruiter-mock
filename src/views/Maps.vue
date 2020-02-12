@@ -35,15 +35,24 @@
         v-bind:key="id"
         v-for="(getLatLngDetach, id) in getLatLngDetach"
         :lat-lng="getLatLngDetach"
+        :icon="icon"
       >
         <l-popup>
           {{ getLatLngDetach.name }}<br />
           {{ getLatLngDetach.email }}
         </l-popup>
       </l-marker>
-
-      <!--*****************( Reserve Force Map )*********************-->
     </l-map>
+    <!--*****************( Reserve Force Map )*********************-->
+    <div v-if="!shownMap">
+      <p>Show reserve units that belong to these environments</p>
+      <input id="Army" v-model="armyMarkers" type="checkbox" />
+      <label for="Army">Army</label>
+      <input id="Navy" v-model="navyMarkers" type="checkbox" />
+      <label for="Navy">Navy</label>
+      <input id="AirForce" v-model="airForceMarkers" type="checkbox" />
+      <label for="AirForce">Air Force</label>
+    </div>
 
     <l-map
       :zoom="zoom"
@@ -55,15 +64,58 @@
       v-if="!shownMap"
     >
       <l-tile-layer :url="url" :attribution="attribution" />
+      <!--*****************( All Environments )*********************-->
+      <!--      <l-marker-->
+      <!--        v-bind:key="id"-->
+      <!--        v-for="(getLatLngUnits, id) in getLatLngUnits"-->
+      <!--        :lat-lng="getLatLngUnits"-->
+      <!--        :icon="icon"-->
+      <!--      >-->
+      <!--        <l-popup>-->
+      <!--          {{ getLatLngUnits.name }}<br />-->
+      <!--          {{ getLatLngUnits.email }}-->
+      <!--        </l-popup>-->
+      <!--      </l-marker>-->
+
+      <!--*****************( Army Markers)*********************-->
       <l-marker
         v-bind:key="id"
-        v-for="(getLatLngUnits, id) in getLatLngUnits"
-        :lat-lng="getLatLngUnits"
-        :icon="icon"
+        v-for="(getUnitsArmy, id) in getUnitsArmy"
+        :lat-lng="getUnitsArmy"
+        :icon="iconGreen"
+        :visible="armyMarkers"
       >
         <l-popup>
-          {{ getLatLngUnits.name }}<br />
-          {{ getLatLngUnits.email }}
+          {{ getUnitsArmy.name }}<br />
+          {{ getUnitsArmy.email }}
+        </l-popup>
+      </l-marker>
+
+      <!--*****************( Navy Markers )*********************-->
+      <l-marker
+        v-bind:key="id"
+        v-for="(getUnitsNavy, id) in getUnitsNavy"
+        :lat-lng="getUnitsNavy"
+        :icon="iconBlue"
+        :visible="navyMarkers"
+      >
+        <l-popup>
+          {{ getUnitsNavy.name }}<br />
+          {{ getUnitsNavy.email }}
+        </l-popup>
+      </l-marker>
+
+      <!--*****************( Air Force Markers )*********************-->
+      <l-marker
+        v-bind:key="id"
+        v-for="(getUnitsAirForce, id) in getUnitsAirForce"
+        :lat-lng="getUnitsAirForce"
+        :icon="iconGrey"
+        :visible="airForceMarkers"
+      >
+        <l-popup>
+          {{ getUnitsAirForce.name }}<br />
+          {{ getUnitsAirForce.email }}
         </l-popup>
       </l-marker>
     </l-map>
@@ -90,10 +142,40 @@ export default {
       mapOptions: {
         zoomSnap: 0.5
       },
+      armyMarkers: true,
+      navyMarkers: true,
+      airForceMarkers: true,
       shownMap: true,
       icon: icon({
         iconUrl:
           "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+        shadowSize: [41, 41],
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      }),
+      iconGreen: icon({
+        iconUrl:
+          "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+        shadowSize: [41, 41],
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      }),
+      iconBlue: icon({
+        iconUrl:
+          "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+        shadowSize: [41, 41],
+        iconSize: [32, 37],
+        iconAnchor: [16, 37]
+      }),
+      iconGrey: icon({
+        iconUrl:
+          "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png",
         shadowUrl:
           "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
         shadowSize: [41, 41],
@@ -142,11 +224,40 @@ export default {
           lng: parseFloat(units.longitude),
           name: units.name,
           email: units.email,
+          phone: units.phone,
           environment: units.environment
         };
       });
       return getUnitsArmy;
     },
+    getUnitsNavy() {
+      var getUnitsNavy = this.$store.getters.navyUnits.map(units => {
+        return {
+          id: units.id,
+          lat: parseFloat(units.latitude),
+          lng: parseFloat(units.longitude),
+          name: units.name,
+          email: units.email,
+          phone: units.phone,
+          environment: units.environment
+        };
+      });
+      return getUnitsNavy;
+    },
+    getUnitsAirForce() {
+      var getUnitsAirForce = this.$store.getters.airForceUnits.map(units => {
+        return {
+          id: units.id,
+          lat: parseFloat(units.latitude),
+          lng: parseFloat(units.longitude),
+          name: units.name,
+          email: units.email,
+          phone: units.phone,
+          environment: units.environment
+        };
+      });
+      return getUnitsAirForce;
+    }
   },
   methods: {
     zoomUpdate(zoom) {

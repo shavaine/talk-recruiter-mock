@@ -27,7 +27,7 @@ export default new Vuex.Store({
         return units.environment == "Navy";
       });
     },
-    airforceUnits: state => {
+    airForceUnits: state => {
       return state.units.filter(units => {
         return units.environment == "Air Force";
       });

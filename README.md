@@ -1,24 +1,20 @@
-# talk-recruiter-mock
+# Talk-Recruiter-Mock
 
-## Project setup
+## Project Setup
+
 ```
 npm install
+npm install -g json-server
 ```
+### Start Mock REST API server
+json-server --watch db.json
+### Start Project Server
+npm run server
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## More Info
+Application was built purely for testing purposes.
+Any questions, please feel free to email me at:
+shavaine@msn.com
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

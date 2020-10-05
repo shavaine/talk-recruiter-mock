@@ -1,28 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Recruiting</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarColor02"
-      aria-controls="navbarColor02"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor02">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <p class="nav-link my-0">Map View</p>
-        </li>
-        <li class="nav-item">
-          <p class="nav-link my-0">List View</p>
-        </li>
-      </ul>
-    </div>
+  <nav>
+    <v-app-bar app color="grey">
+      <v-toolbar-title><v-btn to="/" text class="Link text-capitalize text-h5 px-1 px-sm-4">Recruiting</v-btn></v-toolbar-title>
+      <v-toolbar-items><v-btn to="/map" text class="Link text-capitalize px-1 px-sm-4">Map View</v-btn></v-toolbar-items>
+      <v-toolbar-items><v-btn to="/list" text class="Link text-capitalize px-1 px-sm-4">List View</v-btn></v-toolbar-items>
+    </v-app-bar>
   </nav>
 </template>
 
@@ -33,4 +15,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+a {
+  text-decoration: none;
+}
+.Link {
+  color: white;
+}
+</style>

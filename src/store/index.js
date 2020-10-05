@@ -19,17 +19,17 @@ export default new Vuex.Store({
   getters: {
     armyUnits: state => {
       return state.units.filter(units => {
-        return units.environment == "Army";
+        return units.environment === "Army";
       });
     },
     navyUnits: state => {
       return state.units.filter(units => {
-        return units.environment == "Navy";
+        return units.environment === "Navy";
       });
     },
     airForceUnits: state => {
       return state.units.filter(units => {
-        return units.environment == "Air Force";
+        return units.environment === "Air Force";
       });
     }
   }

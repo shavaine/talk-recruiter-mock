@@ -1,14 +1,17 @@
 <template>
-  <div id="app">
+  <v-app>
     <Navigation />
-    <MapOrList />
-  </div>
+    <v-main>
+      <router-view />
+    </v-main>
+    <Footer />
+  </v-app>
 </template>
 
 <style></style>
 <script>
 import Navigation from "./components/Navigation";
-import MapOrList from "./views/MapOrList";
+import Footer from "./components/Footer";
 import axios from "axios";
 import store from "./store/index";
 
@@ -16,10 +19,7 @@ export default {
   name: "App",
   components: {
     Navigation,
-    MapOrList
-  },
-  data() {
-    return {};
+    Footer
   },
   async created() {
     store.state.detachments = (
